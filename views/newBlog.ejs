@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head") %>
+    <title>New Blog</title>
+  </head>
+  <body>
+    <h1 style="display: flex; justify-content: center; padding: 3rem;">
+      New Blog (New IDEA)
+    </h1>
+    <div class="container">
+      <form action="/Blog/create" method="post">
+        <!-- Full Name -->
+        <div class="mb-3">
+          <label for="name" class="form-label">Blog Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="form-control"
+            placeholder="Enter the full name"
+            required
+          />
+        </div>
+        <!-- Author -->
+        <div class="mb-3">
+          <label for="author" class="form-label">Author</label>
+          <input
+            type="text"
+            id="author"
+            name="author"
+            class="form-control"
+            placeholder="Enter the author name"
+            required
+          />
+        </div>
+        <!-- Blog Content -->
+        <div class="mb-3">
+          <label for="blog" class="form-label">Blog Content</label>
+          <textarea
+            id="blog"
+            name="blog"
+            class="form-control"
+            rows="5"
+            placeholder="Write your blog here..."
+            required
+          ></textarea>
+        </div>
+        <!-- Image Input  -->
+        <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              class="form-control"
+              accept="image/*"
+            />
+          </div>
+        <!-- Submit Button -->
+        <div style="display: flex; justify-content: center;">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

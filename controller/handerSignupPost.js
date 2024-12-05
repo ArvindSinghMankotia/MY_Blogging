@@ -1,5 +1,5 @@
 const user = require("../models/user")
-const btcrypt = require("bcryptjs") 
+const btcrypt = require("bcryptjs")
 
 async function handlerSignupPost(req, res) {
     const { fullName, email, password } = req.body;
@@ -8,7 +8,9 @@ async function handlerSignupPost(req, res) {
 
         if (existinguser) {
             console.log("msg: Email is already registered");
-            return res.status(400).send({ msg: "Email is already registered" });
+            return res.render("sighin", {
+                error: "The user already exists!"
+            });
         }
         //create hash to sore in db
         const hashedpassword = await btcrypt.hash(password, 10);
@@ -20,7 +22,7 @@ async function handlerSignupPost(req, res) {
         })
         if (data) {
             console.log("msg:user is created");
-            return res.redirect("/");
+            return res.redirect("/user/sighin");
         }
     }
     catch (error) {

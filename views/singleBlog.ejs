@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head") %>
+    <!-- Include head partial -->
+    <title><%- blog.title || "Blog" %></title>
+    <style>
+      .blog-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .blog-title {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        text-align: center;
+      }
+      .blog-author {
+        font-size: 0.9rem;
+        color: #888;
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+      .blog-image {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+      }
+      .blog-content {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #555;
+      }
+      .back-link {
+        display: block;
+        margin-top: 2rem;
+        text-align: center;
+        text-decoration: none;
+        font-size: 1rem;
+        color: #007bff;
+      }
+      .back-link:hover {
+        color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include("./partials/navebar") %>
+    <!-- Include navbar partial -->
+
+    <main>
+      <div class="blog-container">
+        <!-- Blog Title -->
+        <h1 class="blog-title"><%- blog.name || "Untitled Blog" %></h1>
+
+        <!-- Blog Author -->
+        <% if (blog.author) { %>
+        <p class="blog-author">By- <%- blog.author %></p>
+        <% } %>
+
+        <!-- Blog Image -->
+        <% if (blog.imageUrl) { %>
+        <img
+          src="<%- blog.imageUrl %>"
+          alt="<%- blog.name || 'Blog Image' %>"
+          class="blog-image"
+        />
+        <% } %>
+
+        <!-- Blog Content -->
+        <div class="blog-content">
+            <pre style="font-size: 17px;"><%- blog.blog || "No content available." %></pre>
+          </div>
+          
+
+        <!-- Back to Homepage Link -->
+        <a href="/" class="back-link">← Back to Homepage</a>
+      </div>
+    </main>
+
+    <%- include("./partials/script") %>
+    <!-- Include script partial -->
+  </body>
+</html>

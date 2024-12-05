@@ -14,9 +14,12 @@ function GernateTheToken(user) {
 
 function VerifieTheTokne(token) {
     if(jwt.verify(token,secret_pass)){
-        return true;
+        const decoded = jwt.decode(token);
+        console.log("the data in funciton is :",decoded);
+        return decoded;
     }
     else{
+        console.log("the token is not valid");
         return false;
     }
 }

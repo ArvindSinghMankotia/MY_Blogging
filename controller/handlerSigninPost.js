@@ -2,7 +2,7 @@ const user = require("../models/user")
 const btcrypt = require("bcryptjs")
 const { GernateTheToken, VerifieTheTokne } = require("../services/TokenGernater&Vaidater.js")
 
-async function handlerSigninPost(req, res) { 
+async function handlerSigninPost(req, res) {
     const { email, password } = req.body;
     console.log(req.body);
     try {
@@ -15,21 +15,21 @@ async function handlerSigninPost(req, res) {
                 //gernate the jwt
                 const token = GernateTheToken(presentUser);
 
-                console.log("the user is valid"); 
+                console.log("the user is valid");
                 console.log("token is", token);
                 return res.cookie("token", token).redirect("/");
-                
+
 
             }
             else {
-                return res.render('sighin.ejs',{
-                    error : "The Password  is Wrong !"
+                return res.render('sighin.ejs', {
+                    error: "The Password  is Wrong !"
                 })
             }
         }
         else {
-            return res.render('sighin.ejs',{
-                error : "The User is Not Present !"
+            return res.render('sighin.ejs', {
+                error: "The User is Not Present !"
             })
         }
     }

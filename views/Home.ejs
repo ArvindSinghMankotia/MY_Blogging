@@ -1,13 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <%- include("./partials/head") %>
+    <!-- Include head partial (CSS, meta tags, etc.) -->
     <title>HomePage</title>
-</head>
-<body>
+    <style>
+      /* Basic Styling */
+      .blogs-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+        gap: 1.5rem;
+        padding: 1rem;
+      }
+      .card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+      }
+      .card img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+      .card-body {
+        padding: 1rem;
+      }
+      .card-title {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+      }
+      .card-text {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        color: #555;
+        display: -webkit-box;
+        /* -webkit-line-clamp: 3; Limit to 3 lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .btn {
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+      }
+      .btn:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
     <%- include("./partials/navebar") %>
-    <h1>HomePage</h1>
-    <p>User: <%= JSON.stringify(user) %></p>
+    <!-- Include navbar partial -->
+
+    <main>
+      <section
+        style="
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 4px;
+        "
+      >
+        <h1>Welcome to the HomePage</h1>
+      </section>
+
+      <!-- Display message if the user is not logged in -->
+      <% if (!locals.user) { %>
+      <section>
+        <h2>You are not logged in.</h2>
+      </section>
+      <% } %>
+
+      <!-- Display blogs if available -->
+      <% if (locals.blogs && locals.blogs.length > 0) { %>
+      <section>
+        <h2 style="margin-left: 17px">Latest Blogs</h2>
+        <div class="blogs-container">
+          <% locals.blogs.forEach(blog => { %>
+          <div class="card">
+            <!-- Image rendering -->
+            <img
+              src="<%- blog.imageUrl || 'default-image.jpg' %>"
+              alt="<%- blog.title || 'Blog image' %>"
+            />
+            <div class="card-body">
+              <h5 class="card-title"><%- blog.name || 'Untitled Blog' %></h5>
+              <!-- Limit content to the first few lines -->
+              <p class="card-text">
+                <%- blog.blog.length > 100 ? blog.blog.substring(0, 100) + '...'
+                : blog.blog %>
+              </p>
+              <a href="/Blog/<%- blog.id %>" class="btn">Read more</a>
+            </div>
+          </div>
+          <% }); %>
+        </div>
+      </section>
+      <% } else { %>
+      <section>
+        <p>No blogs available at the moment.</p>
+      </section>
+      <% } %>
+    </main>
+
     <%- include("./partials/script") %>
-</body>
+    <!-- Include scripts partial -->
+  </body>
 </html>
