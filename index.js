@@ -20,7 +20,7 @@ app.use(cookiePaser());
 app.use(express.static(path.resolve("./public")))
 
 
-mongoose.connect("mongodb+srv://admin:root@cluster0.moqnjnl.mongodb.net/blogging_app")
+mongoose.connect("___DATA_BASE_URL____")
     .then(console.log("The db is connected")).catch((error) => {
         console.log("The db is not connected");
     })
